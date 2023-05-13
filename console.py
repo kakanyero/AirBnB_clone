@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Module for the entry point of the command interpreter."""
+"""
+Entry point for the command interpreter.
+"""
 
 import cmd
 from models.base_model import BaseModel
@@ -10,18 +12,17 @@ import json
 
 class HBNBCommand(cmd.Cmd):
 
-    """Class for the command interpreter."""
+    """Command interpreter class."""
 
     prompt = "(hbnb) "
 
     def default(self, line):
-        """Catch commands if nothing else matches then."""
+        """method throws error if no match for anything else"""
         # print("DEF:::", line)
         self._precmd(line)
 
     def _precmd(self, line):
-        """Intercepts commands to test for class.syntax()"""
-        # print("PRECMD:::", line)
+        """Method catches commands that test for class.syntax()"""
         match = re.search(r"^(\w*)\.(\w+)(?:\(([^)]*)\))$", line)
         if not match:
             return line
@@ -52,7 +53,7 @@ class HBNBCommand(cmd.Cmd):
         return command
 
     def update_dict(self, classname, uid, s_dict):
-        """Helper method for update() with a dictionary."""
+        """ Method used to update() with a dictionary."""
         s = s_dict.replace("'", '"')
         d = json.loads(s)
         if not classname:
@@ -74,23 +75,27 @@ class HBNBCommand(cmd.Cmd):
                 storage.all()[key].save()
 
     def do_EOF(self, line):
-        """Handles End Of File character.
+        """
+        Method which handles End Of File character.
         """
         print()
         return True
 
     def do_quit(self, line):
-        """Exits the program.
+        """
+        Method which exits the program.
         """
         return True
 
     def emptyline(self):
-        """Doesn't do anything on ENTER.
+        """
+        Method which does not do anything with ENTER.
         """
         pass
 
     def do_create(self, line):
-        """Creates an instance.
+        """
+        Method which creates an instance.
         """
         if line == "" or line is None:
             print("** class name missing **")
@@ -102,7 +107,8 @@ class HBNBCommand(cmd.Cmd):
             print(b.id)
 
     def do_show(self, line):
-        """Prints the string representation of an instance.
+        """
+        Method which prints string representation of an instance.
         """
         if line == "" or line is None:
             print("** class name missing **")
@@ -120,7 +126,8 @@ class HBNBCommand(cmd.Cmd):
                     print(storage.all()[key])
 
     def do_destroy(self, line):
-        """Deletes an instance based on the class name and id.
+        """
+        Method which deletes an instance based on class name and id.
         """
         if line == "" or line is None:
             print("** class name missing **")
@@ -139,7 +146,8 @@ class HBNBCommand(cmd.Cmd):
                     storage.save()
 
     def do_all(self, line):
-        """Prints all string representation of all instances.
+        """
+        Method which prints entire string representation of all the instances.
         """
         if line != "":
             words = line.split(' ')
@@ -154,7 +162,8 @@ class HBNBCommand(cmd.Cmd):
             print(new_list)
 
     def do_count(self, line):
-        """Counts the instances of a class.
+        """
+        Method which counts class instances.
         """
         words = line.split(' ')
         if not words[0]:
@@ -163,12 +172,13 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             matches = [
-                k for k in storage.all() if k.startswith(
+                x for x in storage.all() if x.startswith(
                     words[0] + '.')]
             print(len(matches))
 
     def do_update(self, line):
-        """Updates an instance by adding or updating attribute.
+        """
+        Method which updates an instance using the addition/update attribute.
         """
         if line == "" or line is None:
             print("** class name missing **")
@@ -210,11 +220,10 @@ class HBNBCommand(cmd.Cmd):
                     try:
                         value = cast(value)
                     except ValueError:
-                        pass  # fine, stay a string then
+                        pass
                 setattr(storage.all()[key], attribute, value)
                 storage.all()[key].save()
 
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
-
