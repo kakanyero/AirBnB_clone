@@ -23,13 +23,14 @@ class Test_Console(unittest.TestCase):
 
     def test_help(self):
         """Tests the help command."""
-        with patch('sys.stdout', new=StringIO()) as f:
+        with patch("sys.stdout", new=StringIO()) as f:
             HBNBCommand().onecmd("help")
-        s = """
+        s ="""
 Documented commands (type help <topic>):
 ========================================
-EOF  all  count  create  destroy  help  quit  show  update\n
-"""
+EOF all count create destroy help quit show update
+
+    """
         self.assertEqual(s, f.getvalue())
 
     # Test cases for quit

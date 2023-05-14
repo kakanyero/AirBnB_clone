@@ -43,7 +43,7 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         try:
                             setattr(obj, args[2], eval(args[3].strip('"')))
-                        except:
+                        except TypeError:
                             setattr(obj, args[2], args[3].strip('"'))
                         storage.save()
             else:
@@ -124,7 +124,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, arg):
         """Quit command to exit the program \n"""
-        sys.exit(1)
+        return True
 
     def do_EOF(self, arg):
         """ EOF SystemExiit """
@@ -176,6 +176,7 @@ class HBNBCommand(cmd.Cmd):
             if name_id.split(".")[0] == class_name:
                 num_objs += 1
         print(num_objs)
+
 
 if __name__ == '__main__':
     prompt = HBNBCommand()
