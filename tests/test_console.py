@@ -286,5 +286,5 @@ EOF  all  create  destroy  help  quit  show  update
         self.assertEqual(msg, "** no instance found **")
 
 
-    if __name__ == "__main__":
-        unittest.main()
+if __name__ == "__main__":
+    unittest.main()
