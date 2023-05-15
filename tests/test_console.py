@@ -622,16 +622,6 @@ EOF  all  create  destroy  help  quit  show  update
         self.assertTrue(len(uid) > 0)
         return uid
 
-    def help_load_dict(self, rep):
-        """Helper method to test dictionary equality"""
-        rex = re.compile(r"^\[(.*)\] \((.*)\) (.*)$")
-        res = rex.match(rep)
-        self.assertIsNotNone(res)
-        s = res.group(3)
-        s = re.sub(r"(datetime\.datetime\([^)]*\))", "'\\1'", s)
-        d = json.loads(s.replace("'", '"'))
-        return d
-
 
 if __name__ == "__main__":
     unittest.main()
