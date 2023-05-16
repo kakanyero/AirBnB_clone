@@ -43,7 +43,7 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         try:
                             setattr(obj, args[2], eval(args[3].strip('"')))
-                        except TypeError:
+                        except ValueError:
                             setattr(obj, args[2], args[3].strip('"'))
                         storage.save()
             else:
