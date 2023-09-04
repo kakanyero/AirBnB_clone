@@ -1,4 +1,4 @@
-
+THIS IS FOR U TO UNDERSTAND THE PROJECT
 0x00. AirBnB clone - The console
 Group project
 Python
